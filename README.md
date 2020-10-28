@@ -12,12 +12,12 @@ $ curl -X POST -H "Content-Type: application/json" -d '{"name":"foo"}' http://lo
 ```
 To push,
 ```shell
-curl -X POST -H "Content-Type: application/json" -d '{"value":"5"}' http://127.0.0.1:5000/push/foo
+$ curl -X POST -H "Content-Type: application/json" -d '{"value":"5"}' http://127.0.0.1:5000/push/foo
 {"pushed":"5"} # returned
 ```
 To pop,
 ```shell
-curl -X POST http://127.0.0.1:5000/pop/foo
+$ curl -X POST http://127.0.0.1:5000/pop/foo
 {"popped":"5"} # returned
 ```
 
