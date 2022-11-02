@@ -23,8 +23,10 @@ $ curl -X POST http://localhost:5000/pop/foo
 
 ## All features
 * **/calc/{name}** (POST) to perform stack calculator computation. Supports 'ADD', 'SUB', 'MUL', 'DIV' between two integers.
+* **/clear/{name}** (POST) to clear the stack.
 * **/create** (POST) to create a stack named {name} where data is {"name": name}
 * **/list** (GET) to list all stacks.
 * **/peek/{name}** (GET) to peek in the whole stack.
 * **/pop/{name}** (POST) to pop a value from the stack.
 * **/push/{name}** (POST) to push {value} onto the stack where data is {"value": value}
+* **/run/{name}** (POST) to run the popped list as a  program written in Reverse Polish Notation.

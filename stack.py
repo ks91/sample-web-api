@@ -69,7 +69,7 @@ def calc(name):
         arg1 = int(stacks[name].pop())
 
         value = str(arg1 - arg2)
-		
+        
     elif op == 'MUL':
         if len(stacks[name]) < 2:
             abort_by_missing_param('operand')
@@ -96,6 +96,18 @@ def calc(name):
 
     return jsonify({
         'result': value
+    })
+
+
+@stack.route('/clear/<string:name>', methods=['POST'])
+def clear(name):
+    if name not in stacks:
+        abort_by_not_found('name', name)
+
+    stacks[name] = []
+
+    return jsonify({
+        'stack': stacks[name]
     })
 
 
@@ -162,6 +174,33 @@ def push(name):
 
     return jsonify({
         'pushed': value
+    })
+
+
+@stack.route('/run/<string:name>', methods=['POST'])
+def run(name):
+    if name not in stacks:
+        abort_by_not_found('name', name)
+
+    if len(stacks[name]) <= 0:
+        abort(400, {
+            'code': 'Bad Request',
+            'message': 'stack is empty'
+        })
+
+    if type(stacks[name][-1]) is not list:
+        abort_by_missing_param('program')
+
+    program = stacks[name].pop()
+
+    for code in program:
+        stacks[name].append(code)
+
+        if stacks[name][-1].isalpha():
+            calc(name)
+
+    return jsonify({
+        'result': stacks[name][-1]
     })
 
 
